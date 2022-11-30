@@ -21,6 +21,13 @@ body {
   font-size: 40px;
 }
 
+.for_author {
+  padding: 80px;
+  text-align: center;
+  background: #000000;
+  color: white;
+}
+
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
 .navbar {
   overflow: hidden;
@@ -96,6 +103,16 @@ body {
   text-align: center;
   background: #ddd;
 }
+
+/* Code Panel */
+.ex {
+    border: dashed 3px #634F36;
+    background: #fff700;
+    font-family: "Roboto", Courier, monospace; 
+    padding: 7px;
+    font-size: 80%;
+    margin: 0 0 1em;
+   }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {
