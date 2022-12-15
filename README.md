@@ -1,3 +1,3 @@
 # derfacn.github.io
 
-Сайт, створений з метою навчитись писати сайти на HTML + CSS, в майбутьому(можливо) з використанням Flask Python. Ну або розміщення матеріалу по Python на сайті :)
+https://derfacn.pythonanywhere.com
