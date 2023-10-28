@@ -1,64 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<title>Головна сторінка</title>
-<link href="style/style.css" rel="stylesheet" type="text/css"> <!-- STYLE -->
-
-<link rel="apple-touch-icon" sizes="76x76" href="style/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="style/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="style/favicon-16x16.png">
-<link rel="manifest" href="style/site.webmanifest">						<!-- ICON -->
-<link rel="mask-icon" href="style/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="styles/favicon.ico">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Randomizer</title>
 </head>
 <body>
-
-<div class="header">
-  <h1>derfacn-s site</h1>
-  <p><b>Проект-сайт вашого розвитку</b></p>
+<div class="main">
+    <textarea id="users"></textarea>
+    <button onclick="Random()">Random</button>
+    <input type="text" id="result" readonly>
 </div>
-
-<div class="navbar">
-  <a href="programming.html">Програмування</a>
-  <a href="history.html">Історія</a>
-  <a href="learning.html">Для авторів</a>
-  <a href="index.html" class="right active">Головна сторінка</a>
-</div>
-
-<div class="row">
-  <div class="side">
-    <h2>Про проект</h2>
-    <h5>Фото головного автора:</h5>
-    <img src="pictures/author.jpeg" alt="me" height="325px">
-    <p>Можна знайти мене в Telegram:<a href="https://t.me/derfacn" target="_blank">derfacn</a></p>
-    <br>А також Whatsapp: +380979426758
-    <h3>Автор матеріалу з історії</h3>
-    <p><a href="https://t.me/NixtViel" target="_blank">Влад</a>, учень 10-Б класу Вільногірського ліцею №5</p>
-    <img src="pictures/nixtviel.jpg" alt="me" height="325px">
-  </div>
-  <div class="main">
-    <h2>Про цей сайт</h2>
-    <h5>28.11.2022 [22:12]</h5>
-    <p>Даний проект створено в напрямку розвитку навиків программування одного автору і історичних знань іншого</p>
-    На сайті розміщується контент з приводу новітьної історії і також мови програмування Python. На разі усі автори проекту
-    будуть готові в будь-який момент поговорити з вами на будь-яку тему стосовно <a href="https://t.me/NixtViel" target="_blank">історії</a> та <a href="https://t.me/derfacn" target="_blank">Python</a><br>
-    <h2>Запрошуємо Вас до Нашої команди!</h2>
-    <h5>01.12.2022 [0:30]</h5>
-    Від сьогодні сайт набув свого вигляду і структурованості, і тому запрошуємо всіх небайдужих приєднатись до команди авторів матеріалу або самого сайту! Впевнений, всі, 
-    хто напише <a href="https://t.me/derfacn" target="_blank">головному автору</a>, точно знайде собі цікаву роботу в ролі творця контенту, або ж спів-автора цього сайту
-    (при базових знаннях HTML) а також однодумців, з якими можна знайти спільні інтереси і поговорити на цікаві для вас теми. <b>Приєднуйся!</b>
-	  <script src="//onlinegdb.com/embed/js/3Osc90IeSF?theme=dark"></script>
-  </div>
-</div>
-
-<div class="footer">
-  <h2>Ви можете знайти мене в <a href="https://t.me/derfacn">Телеграмі</a></h2>
-	Весь код знаходиться на <a href="https://github.com/DerFacn/derfacn.github.io/">GitHub</a>
-</div>
-
 </body>
+<script>
+    function rndNum(min, max) {
+        let rand = min + Math.random() * (max - min);
+        return Math.floor(rand);
+    }
+    function Random() {
+        let list = document.getElementById('users').value;
+        let arrList = list.split('\n');
+        arrList = arrList.map(function (n) {
+            return n.trim();
+        });
+        let winner = rndNum(1, arrList.length);
+        let result = document.getElementById('result');
+        result.value = arrList[winner];
+    }
+</script>
 </html>

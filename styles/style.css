@@ -1,0 +1,41 @@
+body, html {
+    height: 100%;
+    margin: 20px auto;
+    padding: 0;
+}
+
+.main {
+    width: 40%;
+    height: 60%;
+    margin: auto;
+    border: 5px solid blue;
+    border-radius: 15px;
+    padding: 2%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(3, 33.33%);
+    grid-column-gap: 1%;
+    grid-row-gap: 1%;
+}
+
+.main textarea {
+    overflow-y: scroll;
+    resize: none;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column: 1;
+}
+
+.main button {
+    grid-column: 2;
+    grid-row: 3;
+    width: 100%;
+    font-size: 150%;
+}
+
+.main input {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    font-size: 150%;
+    text-align: center;
+}

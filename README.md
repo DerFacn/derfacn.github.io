@@ -1,3 +1,3 @@
 # derfacn.github.io
 
-https://derfacn.pythonanywhere.com
+https://derfacn.github.io
