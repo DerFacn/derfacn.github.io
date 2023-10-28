@@ -27,7 +27,7 @@
         arrList = arrList.map(function (n) {
             return n.trim();
         });
-        let winner = rndNum(1, arrList.length);
+        let winner = rndNum(0, arrList.length);
         let result = document.getElementById('result');
         result.value = arrList[winner];
     }
