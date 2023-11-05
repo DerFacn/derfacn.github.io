@@ -1,41 +1,200 @@
-body, html {
-    height: 100%;
-    margin: 20px auto;
-    padding: 0;
+html {
+  font-size: 62.5%;
 }
 
-.main {
-    width: 40%;
-    height: 60%;
-    margin: auto;
-    border: 5px solid blue;
-    border-radius: 15px;
-    padding: 2%;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: repeat(3, 33.33%);
-    grid-column-gap: 1%;
-    grid-row-gap: 1%;
+
+body {
+  margin: 0;
+  font-family: 'Poppins';
 }
 
-.main textarea {
-    overflow-y: scroll;
-    resize: none;
-    grid-row-start: 1;
-    grid-row-end: 4;
-    grid-column: 1;
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.main button {
-    grid-column: 2;
-    grid-row: 3;
-    width: 100%;
-    font-size: 150%;
+/* Navigation bar */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.main input {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    font-size: 150%;
-    text-align: center;
+nav {
+  margin: 4em;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 4.1em;
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  position: relative;
+}
+
+
+nav ul li a.active:before {
+  position: absolute;
+  content: "";
+  width: 35%;
+  height: 1px;
+  border-bottom: 2px solid black;
+  bottom: 0;
+}
+
+/* Kittens section */
+
+main {
+  display: flex;
+  gap: 8em;
+  margin-top: 11em;
+}
+
+.left-col {
+  width: 45%;
+}
+.right-col {
+  flex-grow: 1;
+}
+
+h1 {
+  font-size: 5.2rem;
+  font-family: 'Playfair Display';
+  font-weight: normal;
+  margin: 0;
+}
+
+.subhead {
+  font-size: 1.8rem;
+}
+
+.cta-buttons {
+  margin: 5em 0;
+}
+
+.cta-buttons, .secondary-button {
+  display: flex;
+  gap: 2em;
+}
+
+.primary-button {
+  background-color: #F1E2D1;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  border-radius: 1.9em;
+  padding: 1em 2em;
+}
+
+.secondary-button {
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 1em 0;
+}
+
+.secondary-button svg {
+  width: 20px;
+}
+
+.news {
+  display: flex;
+  gap: 3em;
+  padding: 5em;
+  border: 5px solid black;
+  border-radius: .8em;
+  position: relative;
+}
+
+.news:before {
+  position: absolute;
+  content: "";
+  background: url('../images/confetti.svg');
+  width: 100px;
+  height: 100px;
+  top: -20px;
+  left: -20px;
+  z-index: 2;
+}
+
+p.employees {
+  font-size: 3.3rem;
+  margin: 0;
+  line-height: 100%;
+}
+
+p.details {
+  font-size: 1.8em;
+  margin: 0;
+}
+
+/* right column gallery */
+
+.right-col {
+  display: grid;
+  gap: 2.3em;
+  grid-template-columns: repeat(2, auto);
+  grid-template-areas:
+    "left ."
+    "left .";
+}
+
+.card {
+  border-radius: .8em;
+  padding: 1.1em;
+  display: flex;
+  align-items: end;
+  background-size: 150%;
+}
+
+.card1 {
+  grid-area: left;
+  background-color: #51BBFC;
+  background-image: url('../images/picture1.png');
+}
+
+.card2 {
+  background-color: #96FF56;
+  background-image: url('../images/picture2.png');
+}
+
+.card3 {
+  background-color: #FFF256;
+  background-image: url('../images/picture3.png');
+  background-position: 0;
+}
+
+.card-details {
+  background-color: white;
+  border-radius: .6em;
+  padding: 2em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-details a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.card-details p {
+  font-size: 1.4rem;
+  margin: 0;
+}
+p.kitten-price {
+  font-size: 1.8rem;
 }
