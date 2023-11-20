@@ -1,79 +1,111 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@200;400&display=swap" rel="stylesheet">
-  <title>Hello, Frontend</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter';
+        }
+
+        li {
+            margin: 20px;
+        }
+    </style>
+    <title>Document</title>
 </head>
 <body>
-
-  <div class='wrapper'>
-    <header>
-      <a href='#'><img src='images/logo.svg' alt='Kitten Logo'></a>
-      <nav>
-        <ul>
-          <li><a href='#' class='active'>Home</a></li>
-          <li><a href='#'>Kittens</a></li>
-          <li><a href='#'>Contacts</a></li>
-          <li><a href='#'>About</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <div class='left-col'>
-        <h1>Kittens paradise</h1>
-        <p class='subhead'>
-          Here you can find pictures of the most beautiful cats on Earth
-        </p>
-        <div class='cta-buttons'>
-          <a href='#' class='primary-button'>Browse kittens!</a>
-          <a href='#' class='secondary-button'>
-            <span>Upload my cat</span>
-            <svg viewBox="0 0 19 8" fill="none">
-              <path d="M18.3536 4.35355C18.5488 4.15829 18.5488 3.84171 18.3536 3.64645L15.1716 0.464466C14.9763 0.269204 14.6597 0.269204 14.4645 0.464466C14.2692 0.659728 14.2692 0.976311 14.4645 1.17157L17.2929 4L14.4645 6.82843C14.2692 7.02369 14.2692 7.34027 14.4645 7.53553C14.6597 7.7308 14.9763 7.7308 15.1716 7.53553L18.3536 4.35355ZM0 4.5H18V3.5H0V4.5Z" fill="black"></path>
-            </svg>
-          </a>
-        </div>
-        <div class='news'>
-          <p class='employees'>100M</p>
-          <p class='details'>pictures of kittens uploaded on our platform!</p>
-        </div>
-      </div>
-      <div class='right-col'>
-        <div class='card card1'>
-          <div class='card-details'>
-            <div>
-              <a href='#' class='kitten-title'>Genadiy</a>
-              <p>Very funny</p>
-            </div>
-            <p class='kitten-price'>$800</p>
-          </div>
-        </div>
-        <div class='card card2'>
-          <div class='card-details'>
-            <div>
-              <a href='#' class='kitten-title'>Piska</a>
-              <p>Too small</p>
-            </div>
-            <p class='kitten-price'>$500</p>
-          </div>
-        </div>
-        <div class='card card3'>
-          <div class='card-details'>
-            <div>
-              <a href='#' class='kitten-title'>EEEPYY</a>
-              <p>taste good</p>
-            </div>
-            <p class='kitten-price'>$:3</p>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
+    
+    <input type="text" id="search" placeholder="Enter word here">
+    <button type="button" onclick="searchWord()">Search</button>
+    <div>
+        <h1 id="word"></h1>
+        <h3 id="phonetic"></h2>
+        <ul id="phonetics"></ul>
+        <h3>Meanings</h3>
+        <div id="result"></div>
+    </div>
 
 </body>
+<script>
+    const url = "https://api.dictionaryapi.dev/api/v2/entries/en/"
+    let word = document.getElementById('word')
+    let phonetic = document.getElementById('phonetic')
+    let phoneticsList = document.getElementById('phonetics')
+    let result = document.getElementById('result')
+
+    function clear() {
+        word.innerHTML = ''
+        phonetic.innerHTML = ''
+        phoneticsList.innerHTML = ''
+        result.innerHTML = ''
+    }
+
+    function createNestedList(meanings) {
+    const resultList = document.createElement('ul');
+    meanings.forEach((meaning) => {
+        const partOfSpeechItem = document.createElement('li');
+        partOfSpeechItem.innerHTML = `Part of Speech: <strong>${meaning.partOfSpeech}</strong>`;
+        
+        if (meaning.synonyms && meaning.synonyms.length > 0) {
+            const synonymsList = document.createElement('ul');
+            meaning.synonyms.forEach((synonym) => {
+                const synonymItem = document.createElement('li');
+                synonymItem.textContent = `Synonym: ${synonym}`;
+                synonymsList.appendChild(synonymItem);
+            });
+            partOfSpeechItem.appendChild(synonymsList);
+        }
+
+        if (meaning.antonyms && meaning.antonyms.length > 0) {
+            const antonymsList = document.createElement('ul');
+            meaning.antonyms.forEach((antonym) => {
+                const antonymItem = document.createElement('li');
+                antonymItem.textContent = `Antonym: ${antonym}`;
+                antonymsList.appendChild(antonymItem);
+            });
+            partOfSpeechItem.appendChild(antonymsList);
+        }
+
+        const definitionsList = document.createElement('ul');
+        meaning.definitions.forEach((definition) => {
+            const definitionItem = document.createElement('li');
+            definitionItem.textContent = `Definition: ${definition.definition}, Example: ${definition.example || '-'}`;
+            definitionsList.appendChild(definitionItem);
+        });
+
+        partOfSpeechItem.appendChild(definitionsList);
+        resultList.appendChild(partOfSpeechItem);
+    });
+    return resultList;
+}
+
+
+    async function searchWord() {
+        clear()
+        const requestUrl = url + document.getElementById('search').value
+        const response = await fetch(requestUrl)
+        const data = await response.json()
+        const content = data[0]
+
+        console.log(content)
+
+        word.innerHTML = content['word']
+        phonetic.innerHTML = content['phonetic']
+        // phonetics 
+        content['phonetics'].forEach((element) => {
+            let audioElement = '';
+            if (element['audio']) {
+                audioElement = `, <audio controls><source src="${element['audio']}" type="audio/mpeg"></audio>`;
+            }
+            phoneticsList.innerHTML += `<li>Text: ${element['text']}${audioElement}</li>`;
+        });
+        // meanings
+        result.appendChild(createNestedList(content['meanings']))
+    }
+
+</script>
 </html>
