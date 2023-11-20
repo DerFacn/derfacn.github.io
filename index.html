@@ -14,20 +14,66 @@
         li {
             margin: 20px;
         }
+
+        #meaningsH {
+            display: none;
+        }
+
+        @media only screen and (max-width: 600px) {
+            body {
+                margin: 0;
+            }
+
+            .wrapper h1, h3 {
+                text-align: center;
+            }
+
+            .header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 20px;
+            }
+
+            .header input {
+                padding: 10px;
+                font-size: 20px;
+                border: 3px solid lightgreen;
+                background-color: #efefef;
+            }
+
+            .header input:focus {
+                outline: none !important;
+                border: 3px solid rgb(16, 225, 16);
+                background-color: white;
+            }
+
+            .header button {
+                padding: 10px;
+                font-size: 20px;
+                border: 3px solid lightgreen;
+            }
+        }
     </style>
     <title>Document</title>
 </head>
 <body>
     
-    <input type="text" id="search" placeholder="Enter word here">
-    <button type="button" onclick="searchWord()">Search</button>
-    <div>
-        <h1 id="word"></h1>
-        <h3 id="phonetic"></h2>
-        <ul id="phonetics"></ul>
-        <h3>Meanings</h3>
-        <div id="result"></div>
+    <div class="wrapper">
+        <div class="header">
+            <input type="text" id="search" placeholder="Enter word here">
+            <button type="button" onclick="searchWord()">Search</button>
+        </div>
+        
+        <div>
+            <h1 id="word"></h1>
+            <h3 id="phonetic"></h2>
+            <ul id="phonetics"></ul>
+            <h3 id="meaningsH">Meanings</h3>
+            <div id="result"></div>
+        </div>
     </div>
+    
 
 </body>
 <script>
@@ -64,7 +110,7 @@
             const antonymsList = document.createElement('ul');
             meaning.antonyms.forEach((antonym) => {
                 const antonymItem = document.createElement('li');
-                antonymItem.textContent = `Antonym: ${antonym}`;
+                antonymItem.innerHTML = `Antonym: ${antonym}`;
                 antonymsList.appendChild(antonymItem);
             });
             partOfSpeechItem.appendChild(antonymsList);
@@ -90,9 +136,6 @@
         const response = await fetch(requestUrl)
         const data = await response.json()
         const content = data[0]
-
-        console.log(content)
-
         word.innerHTML = content['word']
         phonetic.innerHTML = content['phonetic']
         // phonetics 
@@ -105,6 +148,7 @@
         });
         // meanings
         result.appendChild(createNestedList(content['meanings']))
+        document.getElementById('meaningsH').style.display = 'block'
     }
 
 </script>
