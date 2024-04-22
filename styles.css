@@ -1,3 +1,7 @@
+html {
+    background-color: #ebebeb;
+}	
+
 body {
     margin: 0;
     padding: 0;
@@ -15,9 +19,9 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
-    border: 5px solid black;
     border-radius: 25px;
-    box-shadow: 8px 8px 5px #5f5f5f;
+    box-shadow: 0 0 15px #5f5f5f;
+    background-color: #FAFAFA;
 }
 /* HEADER */
 .header {
